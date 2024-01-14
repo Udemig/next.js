@@ -110,3 +110,55 @@
 - Seo açısından her sayfa için metada'ları tanımlamak önemli
 
 - Statik Metdata sayfaların üstünde metdata objesi oluştururuz
+
+- Dinamik sayfalarda (ürün detay gibi) generateMetadata fonksiyonu ile metadatayı tanımlarız
+
+# Layout
+
+- Bir uygulmanın veya sayfa grubun genel dizyanını belirlememiz yardımcı olan yapı.
+
+- Bir sayfa grubun ortak olarak kullandığı bileşnleri layout'ta tanımlayıp gereksiz renderların önüne geçebilir.
+
+- Root layout'a yaptığımız tanım bütün sayfaları etkiler. ama bazı durumlarda sadece bir kaç sayanın ortak olarak bir layout'a sahip olmasını isteyebiliriz
+
+# Template
+
+- Bir uygulmanın veya sayfa grubun genel dizyanını belirlememiz yardımcı olan yapı.
+
+- Template'de sasayfalar arsındak igeçişte state'ler sıfırlanır.
+
+# Özel Dosyalar
+
+- Page.tsx
+- Layout.tsx
+- Template.tsx
+- not-found.tsx
+
+- Loading.tsx
+- - bir bileşnin yüklendiği sürede ekran gelicek içeirği belirler
+
+- Error.tsx
+- - bir bielşen hata fırlarrığı dırımda devreye girer.
+- - prop olarak oluşan hatayı ve sayfayı tekrar render etmeye yaran fonksiyonu alır
+
+# Static vs Dynamic Page
+
+- Next.js'de iki farklı safa türü bulunur.
+
+1. Static Page (Statik Sayfalar):
+
+- Derelem sırasında sunucu tarafında oluşturulur ve bir kezz oluşturulduktan sonra he ristete aynı içeriği sunuyor.
+
+- Static sayfalar genellikle değişmeyen içeirğe sahip olan sayfalarda kullanılır.
+
+- Örnek: Bir blog sitesi, login signup gibi sayfalar
+
+2. Dynamic Page (Dinamik Sayfalar).
+
+- Dinamik sayflar her istekte sunucu tarafından oluşturlur.
+
+- Sayfa içierği, istek anındaki parametrelerle veya dış kaynakardan alınan verileri göre değişebilir.
+
+- Örnek: Bir e ticaret sitesininürün detay sayfası verilebilir. Alına parametrey gör eiçerik değişceğinden bu bi statik sayfa olamaz
+
+# Parallel Routes

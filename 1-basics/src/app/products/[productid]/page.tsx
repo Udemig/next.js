@@ -7,9 +7,9 @@ export type PropType = {
 };
 
 // dinamik metadata tanımlama
-export const generateMetadata = ({params}) => ({
-  title: `Ürün ${params.productid}`
-})
+export const generateMetadata = ({ params }: PropType) => ({
+  title: `Ürün ${params.productid}`,
+});
 
 export default function ProductDetail({ params }: PropType) {
   // eğer ürünün id'si 100 den büyükse

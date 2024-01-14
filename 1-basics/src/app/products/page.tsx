@@ -1,15 +1,18 @@
+import Link from 'next/link';
 import React from 'react';
 
 export default function page() {
+  const products = [1, 2, 3, 4, 5];
+
   return (
-    <div>
+    <div className="flex flex-col gap-5">
       <h1>ÜRÜNLER SAYFASI</h1>
 
-      <h1>ÜRÜN 1</h1>
-      <h1>ÜRÜN 2</h1>
-      <h1>ÜRÜN 3</h1>
-      <h1>ÜRÜN 4</h1>
-      <h1>ÜRÜN 5</h1>
+      {products.map((id) => (
+        <Link key={id} href={`products/${id}`}>
+          Ürün {id}
+        </Link>
+      ))}
     </div>
   );
 }
