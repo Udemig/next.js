@@ -11,12 +11,25 @@ import {
 } from 'next-auth/react';
 
 const Nav = () => {
-  const isLoggedIn = true;
-  const [providers, setProviders] = useState(null);
+  const { data: session } = useSession();
+
+  const [providers, setProviders] = useState<ProviderType | null>(
+    null
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  type ProviderType = {
+    google: {
+      id: string;
+      name: string;
+      type: string;
+      signinUrl: string;
+      callbackUrl: string;
+    };
+  };
+
   useEffect(() => {
-    getProviders().then((res: any) => setProviders(res));
+    getProviders().then((res) => setProviders(res));
   }, []);
 
   return (
@@ -34,19 +47,23 @@ const Nav = () => {
 
       {/* Masaüstü Navigasyon */}
       <div className="sm:flex hidden">
-        {isLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href={'/create-prompt'} className="black_btn">
               Gönderi Oluştur
             </Link>
 
-            <button type="button" className="outliine_btn">
+            <button
+              onClick={() => signOut()}
+              type="button"
+              className="outliine_btn"
+            >
               Çıkış Yap
             </button>
 
             <Link href={'/profile'}>
               <Image
-                src={'/assets/images/logo.svg'}
+                src={session?.user.image!}
                 alt="profile"
                 width={37}
                 height={37}
@@ -58,7 +75,11 @@ const Nav = () => {
           <>
             {providers &&
               Object.values(providers).map((provider) => (
-                <button key={provider.name} className="black_btn">
+                <button
+                  onClick={() => signIn(provider.id)}
+                  key={provider.name}
+                  className="black_btn"
+                >
                   Giriş Yap
                 </button>
               ))}
@@ -68,10 +89,10 @@ const Nav = () => {
 
       {/* Mobile Navigasyon */}
       <div className="sm:hidden flex relative">
-        {isLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Image
-              src={'/assets/images/logo.svg'}
+              src={session?.user.image!}
               alt="profile"
               width={37}
               height={37}
@@ -97,7 +118,10 @@ const Nav = () => {
                 </Link>
                 <button
                   className="black_btn mt-5 w-full"
-                  onClick={() => setIsDropdownOpen(false)}
+                  onClick={() => {
+                    setIsDropdownOpen(false);
+                    signOut();
+                  }}
                 >
                   Çıkış Yap
                 </button>
@@ -108,7 +132,11 @@ const Nav = () => {
           <>
             {providers &&
               Object.values(providers).map((provider) => (
-                <button key={provider.name} className="black_btn">
+                <button
+                  onClick={() => signIn(provider.id)}
+                  key={provider.name}
+                  className="black_btn"
+                >
                   Giriş Yap
                 </button>
               ))}

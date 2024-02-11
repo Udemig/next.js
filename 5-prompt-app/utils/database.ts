@@ -13,10 +13,10 @@ export const connectToDB = async () => {
 
   // bağlanmadıysak veritbanına bağlan
   try {
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(process.env.MONGODB_URL!, {
       dbName: 'promptmaniaDB',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
 
     isConnected = true;
